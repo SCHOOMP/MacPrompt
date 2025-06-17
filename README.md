@@ -1,4 +1,4 @@
-# Stay Awake - macOS Menu Bar App
+# MacPrompt - macOS Menu Bar App
 
 ## Overview
 
