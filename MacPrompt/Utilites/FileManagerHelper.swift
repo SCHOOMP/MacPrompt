@@ -2,13 +2,21 @@ import Foundation
 
 class FileManagerHelper {
     func createTextFile() {
-        let filePath = NSHomeDirectory() + "/Desktop/" + "test.txt"
-        if Foundation.FileManager.default.createFile(atPath: filePath, contents: nil, attributes: nil) {
-            print("File created successfully.")
+        guard let downloadDirectroy = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
+            print("Could not find Downloads directory")
+            return
+        }
+        
+        let filePath = downloadDirectroy.appendingPathComponent("test.txt").path
+        
+        if FileManager.default.createFile(atPath: filePath, contents: nil, attributes: nil) {
+            
+            print("File created successfully at: \(filePath)")
         } else {
             print("File not created.")
-            let urls = Foundation.FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask)
-            print(urls.first ?? "No desktop directory found")
+            print("Downloads directory: \(downloadDirectroy.path)")
+            print("Attempted file path: \(filePath)")
         }
     }
+
 }
